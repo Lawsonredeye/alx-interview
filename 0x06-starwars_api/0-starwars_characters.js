@@ -3,19 +3,47 @@
 const request = require('request');
 const argv = process.argv[2];
 
-request(`https://swapi-api.alx-tools.com/api/films/${argv}/`, function (error, response, body) {
+// request(`https://swapi-api.alx-tools.com/api/films/${argv}/`, function (error, response, body) {
+//   if (error) {
+//     console.error(error);
+//   }
+//   const jsonBody = JSON.parse(body).characters;
+//   for (const i in jsonBody) {
+//     request(`${jsonBody[i]}`, function (err, res, resBody) {
+//       if (err) {
+//         console.error(err);
+//       }
+//       console.log(JSON.parse(resBody).name);
+//     });
+//   }
+// });
+
+request(`https://swap-api.alx-tools.com/api/films/${argv}`, function (error, responnse, body) {
   if (error) {
     console.error(error);
-  }
-  const jsonBody = JSON.parse(body).characters;
-  let i = 0;
-  while (i < jsonBody.length) {
-    request(`${jsonBody[i]}`, function (err, res, resBody) {
-      if (err) {
-        console.error(err);
-      }
-      console.log(JSON.parse(resBody).name);
+  } else {
+    const characters = JSON.parse(body).characters;
+    // use promises to be able to print values one at a time
+
+    let promises = characters.map(url => {
+      return new Promise((resolve, reject) => {
+        request(url, function (err, res, resBody) {
+          if (err) {
+            reject(err);
+          } else {
+            resolve(JSON.parse(resBody.name))
+          }
+        });
+      });
     });
-    i++;
+    // Resolve all promises sent using resolve
+    Promise.all(promises).then(names => {
+      names.forEach(name => {
+        console.log(name);
+      });
+    }).catch(err => {
+      console.error(err);
+    })
+>>>>>>> 9b3d06248dc4a83fbad82b0ca6837e4dac908c34
   }
 });
