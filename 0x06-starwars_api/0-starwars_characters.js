@@ -1,15 +1,19 @@
 #!/usr/bin/node
 
-const request = require("request")
-const fs = require("fs")
-const { json } = require("stream/consumers")
-argv = process.argv[2]
+const request = require("request");
+const argv = process.argv[2];
 
-request(`https://swapi-api.alx-tools.com/api/films/${argv}/`, function (error, response, body){
-	json_body = JSON.parse(body)
-	for( i in json_body.characters){
-		console.log(json_body.characters[i]);
-	}
-})
-
-// console.log(req)
+request(`https://swapi-api.alx-tools.com/api/films/${argv}/`, function (error, response, body) {
+  if (error) {
+    console.error(error);
+  }
+  const jsonBody = JSON.parse(body).characters;
+  for(const i in jsonBody) {
+    request(`${jsonBody[i]}`, function (err, res, resBody) {
+      if (err) {
+        console.error(err);
+      }
+      console.log(JSON.parse(resBody).name);
+    });
+  }
+});
