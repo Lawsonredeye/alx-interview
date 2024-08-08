@@ -18,20 +18,20 @@ const argv = process.argv[2];
 //   }
 // });
 
-request(`https://swap-api.alx-tools.com/api/films/${argv}`, function (error, responnse, body) {
+request(`https://swapi-api.alx-tools.com/api/films/${argv}`, function (error, responnse, body) {
   if (error) {
     console.error(error);
   } else {
     const characters = JSON.parse(body).characters;
     // use promises to be able to print values one at a time
 
-    let promises = characters.map(url => {
+    const promises = characters.map(url => {
       return new Promise((resolve, reject) => {
         request(url, function (err, res, resBody) {
           if (err) {
             reject(err);
           } else {
-            resolve(JSON.parse(resBody.name))
+            resolve(JSON.parse(resBody.name));
           }
         });
       });
@@ -43,7 +43,6 @@ request(`https://swap-api.alx-tools.com/api/films/${argv}`, function (error, res
       });
     }).catch(err => {
       console.error(err);
-    })
->>>>>>> 9b3d06248dc4a83fbad82b0ca6837e4dac908c34
+    });
   }
 });
