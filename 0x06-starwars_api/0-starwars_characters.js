@@ -1,6 +1,6 @@
 #!/usr/bin/node
 
-const request = require("request");
+const request = require('request');
 const argv = process.argv[2];
 
 request(`https://swapi-api.alx-tools.com/api/films/${argv}/`, function (error, response, body) {
@@ -8,7 +8,7 @@ request(`https://swapi-api.alx-tools.com/api/films/${argv}/`, function (error, r
     console.error(error);
   }
   const jsonBody = JSON.parse(body).characters;
-  for(const i in jsonBody) {
+  for (const i in jsonBody) {
     request(`${jsonBody[i]}`, function (err, res, resBody) {
       if (err) {
         console.error(err);
