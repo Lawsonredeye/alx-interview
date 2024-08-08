@@ -8,12 +8,14 @@ request(`https://swapi-api.alx-tools.com/api/films/${argv}/`, function (error, r
     console.error(error);
   }
   const jsonBody = JSON.parse(body).characters;
-  for (const i in jsonBody) {
+  let i = 0;
+  while (i < jsonBody.length) {
     request(`${jsonBody[i]}`, function (err, res, resBody) {
       if (err) {
         console.error(err);
       }
       console.log(JSON.parse(resBody).name);
     });
+    i++;
   }
 });
