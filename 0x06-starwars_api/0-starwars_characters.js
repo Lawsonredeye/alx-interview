@@ -3,6 +3,7 @@
 const request = require('request');
 const argv = process.argv[2];
 
+/*
 request(`https://swapi-api.alx-tools.com/api/films/${argv}/`, function (error, response, body) {
    if (error) {
      console.error(error);
@@ -17,15 +18,15 @@ request(`https://swapi-api.alx-tools.com/api/films/${argv}/`, function (error, r
      });
    }
  });
+**/
 
-/**
-request(`https://swapi-api.alx-tools.com/api/films/${argv}`, function (error, responnse, body) {
+request(`https://swapi-api.alx-tools.com/api/films/${argv}`, function (error, response, body) {
   if (error) {
     console.error(error);
   } else {
     const jsonBody = JSON.parse(body).characters;
 
-    let promises = jsonBody.map(url => {
+    const promises = jsonBody.map(url => {
       return new Promise((resolve, reject) => {
         request(url, (err, res, resBody) => {
           if (err) reject(err);
@@ -38,4 +39,3 @@ request(`https://swapi-api.alx-tools.com/api/films/${argv}`, function (error, re
     }).catch(error => console.log(error));
   }
 });
-*/
