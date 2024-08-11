@@ -18,7 +18,7 @@ const argv = process.argv[2];
 //   }
 // });
 
-request(`https://swapi-api.alx-tools.com/api/films/${argv}`, function (error, responnse, body) {
+request(`https://swapi-api.alx-tools.com/api/films/${argv}`, function (error, response, body) {
   if (error) {
     console.error(error);
   } else {
