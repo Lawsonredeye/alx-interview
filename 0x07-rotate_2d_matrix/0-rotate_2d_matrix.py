@@ -4,7 +4,7 @@
 """
 
 
-def rotate_2d_matrix(matrix: list[list]):
+def rotate_2d_matrix(matrix):
     """rotates an 2D matrix
     """
     # matrix.reverse()
