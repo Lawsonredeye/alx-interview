@@ -16,5 +16,3 @@ def makeChange(coins, total):
     if dp[total] == float('inf'):
         return -1
     return dp[total]
-
-print(makeChange([1, 2, 25], 37))
