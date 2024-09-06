@@ -5,6 +5,7 @@ strategic removal of prime numbers and their multiples
 from a set of consecutive integers.
 """
 
+
 def isWinner(x, nums):
     """Finds who the winner is
     """
