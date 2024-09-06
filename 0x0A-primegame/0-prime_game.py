@@ -1,7 +1,13 @@
 #!/usr/bin/python3
-
+"""
+The challenge involves determining the winner of a game based on the
+strategic removal of prime numbers and their multiples
+from a set of consecutive integers.
+"""
 
 def isWinner(x, nums):
+    """Finds who the winner is
+    """
     # Step 1: Precompute primes up to the largest n
     # using Sieve of Eratosthenes
     max_num = max(nums)  # Largest n from the input
@@ -16,6 +22,9 @@ def isWinner(x, nums):
 
     # Step 2: Function to simulate a round and determine the winner
     def play_game(n):
+        """
+        checks for the winner and return the winner
+        """
         prime_count = sum(primes[2:n+1])  # Count of primes from 2 to n
         if prime_count == 0:
             return 1  # Ben wins if no primes to pick
